@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Computer Graphics - Game Quiz</title>
+    <link rel="icon" href="./src/img/usb.jpg">
+    <link rel="stylesheet" href="./src/css/style.css">
+    
+    <!-- Add all for GUI -->
+    <script src="./src/libs/jquery-1.11.1.js"></script>
+    <script src="./src/libs/three.js"></script>
+    <script src="./src/libs/DAT.GUI.min.js"></script>
+    <script src="./src/libs/Stats.js"></script>
+    <!-- ////////////////-->
+    <script src="./vendors/three.js-master/build/three.min.js"></script>
+    <script src="./vendors/controls/OrbitControls.js"></script>
+    <script src="./vendors/load/OBJLoader.js"></script>
+    <script src="./vendors/load/MTLLoader.js"></script>
+    <script src="./vendors/load/GLTFLoader.js"></script>
+</head>
+
+<body onload="start()">
+    <canvas id="app"></canvas>
+
+    <div id="menu">
+        <h1>Selecciona Modo</h1>
+        <button id="singlePlayerBtn">Un jugador</button>
+        <button id="twoPlayersBtn">Dos jugadores</button>
+    </div>
+
+    <div id="blocker" style="display: none;">
+        <div id="instructions">
+            <span onclick="go2Play()" style="font-size:36px">Click to play</span>
+            <br /><br />
+            Move: WASD<br/>
+            Look: MOUSE
+        </div>
+    </div>
+
+    <div id="cointainerOthers" style="display: none;">
+        <div id="timer">
+            <div id="score">Puntos: 0</div>
+            <div id="time">Tiempo: 30</div>
+        </div>
+
+        <div id="instructions">
+            <div id="resultMessage" class="hidden"></div>
+            <button id="restartBtn" class="hidden">Volver a Jugar</button>
+        </div>
+        <div style="position: absolute;margin-top: 10px;z-index: 5;right: 1%; cursor: pointer;">
+            <img src="./src/img/icon.png" alt="info" height="42" width="42" onclick="showNameStudents()">
+        </div>
+    </div>
+    
+    <audio id="myAudio">
+        <source src="./src/songs/backgroundSound.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <script>
+        var x = document.getElementById("myAudio"); 
+
+        function playAudio() { 
+            x.volume = 0.5;
+            x.play(); 
+        } 
+
+        $(document).keyup(function(e) {     
+            if(e.keyCode== 27) {
+                location.reload();
+            } 
+        });
+
+        // Variables para el juego
+        let currentPlayer = 1; // 1 para jugador 1, 2 para jugador 2
+        let playerScores = [0, 0]; // Puntuaciones de los jugadores
+
+        // Función para iniciar el juego
+        function startGame(mode) {
+            // Ocultar el menú
+            document.getElementById('menu').style.display = 'none';
+            // Mostrar el contenedor del juego
+            document.getElementById('cointainerOthers').style.display = 'block';
+            document.getElementById('blocker').style.display = 'block'; // Mostrar instrucciones
+
+            if (mode === 'single') {
+                // Lógica para un jugador
+                alert("Modo Un Jugador Seleccionado");
+            } else if (mode === 'two') {
+                // Lógica para dos jugadores
+                alert("Modo Dos Jugadores Seleccionado");
+                // Aquí puedes inicializar las posiciones de los jugadores y otros elementos
+            }
+            go2Play(); // Iniciar el juego
+        }
+
+        // Manejo de eventos para los botones
+        document.getElementById('singlePlayerBtn').addEventListener('click', function() {
+            startGame('single')
+        });
+
+        document.getElementById('twoPlayersBtn').addEventListener('click', function() {
+            startGame('two') 
+        });
+    </script>
+
+    <script src="./src/main.js"></script>
+    
+    <div id="winModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>YOU WIN!</h2>
+    </div>
+</div>
+
+</body>
+</html>
+
